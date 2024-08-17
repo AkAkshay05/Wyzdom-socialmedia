@@ -14,12 +14,17 @@
 #
 # ]
 from django.urls import path, include
-from .views import signup, verify_email
+from .views import signup, verify_email, UserListView, UserProfileView
 from . import views
+from rest_framework_simplejwt.views import TokenObtainPairView
 urlpatterns = [
     path('signup/', signup, name='signup'),
     path('verify-email/<str:uidb64>/<str:token>/', verify_email, name='verify-email'),
     path('login/', views.login, name='login'),
-
+    # path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('users/', UserListView.as_view(), name='UserListView'),
+    path('profile/<int:user_id>/', UserProfileView.as_view(), name='user-profile'),
 ]
+
+
 

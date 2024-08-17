@@ -118,13 +118,18 @@ from django.core.mail import EmailMultiAlternatives
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics, permissions
+from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import CustomUser, UnverifiedUser
 from .serializers import UserSerializer, CustomUserSerializer
 from .tokens import unverified_user_token_generator
 from studygram import settings  # Ensure this is correctly imported
+from followers.models import Follower
+from posts.models import Post
+from posts.serializers import PostSerializer
+
 
 # Function to send activation email
 def send_activation_email(user):
@@ -204,3 +209,33 @@ def login(request):
         'access': str(refresh.access_token),
         'user': serializer.data
     })
+
+
+
+class UserListView(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, user_id):
+        try:
+            user = CustomUser.objects.get(id=user_id)
+            posts = Post.objects.filter(user=user)
+            followers_count = Follower.objects.filter(followed=user).count()
+            following_count = Follower.objects.filter(follower=user).count()
+
+            profile_data = {
+                "user": UserSerializer(user).data,
+                "posts": PostSerializer(posts, many=True).data,
+                "followers_count": followers_count,
+                "following_count": following_count,
+            }
+
+            return Response(profile_data, status=200)
+        except CustomUser.DoesNotExist:
+            return Response({"error": "User not found"}, status=404)

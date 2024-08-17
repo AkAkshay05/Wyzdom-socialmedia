@@ -12,6 +12,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
+from studyapp.serializers import CustomUserSerializer
 
 
 class FollowerCreateView(generics.CreateAPIView):
@@ -65,3 +66,22 @@ class FollowUserView(APIView):
         follow.save()
 
         return Response({"success": "You are now following this user."}, status=status.HTTP_201_CREATED)
+
+
+
+class ListUsersNotFollowedView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Get the current logged-in user
+        user = request.user
+
+        # Get the list of user IDs that the logged-in user is already following
+        followed_users = Follower.objects.filter(follower=user).values_list('followed_id', flat=True)
+
+        # Get the list of users that the logged-in user is NOT following
+        users_to_follow = User.objects.exclude(id__in=followed_users).exclude(id=user.id)
+
+        # Serialize the data
+        serializer = CustomUserSerializer(users_to_follow, many=True)
+        return Response(serializer.data)

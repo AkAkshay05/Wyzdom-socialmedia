@@ -25,3 +25,4 @@ class PostListView(generics.ListAPIView):
 
     def get_queryset(self):
         return Post.objects.filter(user=self.request.user)
+

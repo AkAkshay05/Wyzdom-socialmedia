@@ -8,7 +8,10 @@ class CustomUser(AbstractUser):
     bio = models.TextField(blank=True, null=True)
     profile_url = models.URLField(blank=True, null=True)
     is_verified = models.BooleanField(default=False)  # Track if the user has verified their email
-
+    role=models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(unique=True)
+    role = models.CharField(max_length=255, blank=True, null=True)
+    Dob = models.CharField(max_length=255, blank=True, null=True)
     def __str__(self):
         return self.username
 
@@ -23,6 +26,7 @@ class UnverifiedUser(models.Model):
     display_name = models.CharField(max_length=255, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
     profile_url = models.URLField(blank=True, null=True)
-
+    role = models.CharField(max_length=255, blank=True, null=True)
+    Dob = models.CharField(max_length=255, blank=True, null=True)
     def __str__(self):
         return self.email

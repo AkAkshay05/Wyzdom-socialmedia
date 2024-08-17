@@ -7,7 +7,7 @@ from .models import CustomUser, UnverifiedUser
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UnverifiedUser  # Using UnverifiedUser for signup
-        fields = ['id', 'username', 'password', 'email', 'phone_number', 'display_name', 'bio', 'profile_url']
+        fields = ['id', 'username', 'password', 'email', 'phone_number', 'display_name', 'bio', 'profile_url', 'role']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -23,5 +23,5 @@ class UserSerializer(serializers.ModelSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'email', 'phone_number', 'display_name', 'bio', 'profile_url', 'is_verified']
+        fields = ['id', 'username', 'email', 'phone_number', 'display_name', 'bio', 'profile_url', 'is_verified', 'role']
         read_only_fields = ['is_verified']  # Prevents the verified status from being set via the serializer
