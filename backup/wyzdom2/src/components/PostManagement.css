@@ -1,0 +1,137 @@
+.post-management-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .post-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .post-table th, .post-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .post-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  
+  .post-table td {
+    text-align: left;
+  }
+  
+  button {
+    margin-right: 5px;
+  }
+  
+  /* .post-card{
+    width: 400px;
+  }
+  .post-card img{
+    
+    height: 300px;
+  } */
+
+  /* .post-card {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.post-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.post-card li {
+    border-bottom: 1px solid #e6e6e6;
+    padding: 20px 0;
+}
+
+.post-card h2 {
+    font-size: 20px;
+    color: #262626;
+}
+
+.post-card p {
+    color: #8e8e8e;
+}
+
+.post-card img, .post-card video {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.like-section {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.like-section button {
+  background-color: #3897f0;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.like-section button:hover {
+  background-color: #1b74e4;
+}
+
+.like-section span {
+  font-size: 14px;
+  color: #262626;
+} */
+
+/* PostManagement.css */
+.post-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-card h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.post-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.post-card li {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.like-section {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.like-section span {
+  margin-left: 8px;
+  font-size: 16px;
+}
+.post-card img, .post-card video {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
